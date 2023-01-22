@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Queries</h1>
+
+<div id="queries">
+  <% @queries.each do |query| %>
+    <%= render query %>
+    <p>
+      <%= link_to "Show this query", query %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New query", new_query_path %>
