@@ -10,7 +10,15 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   
-  resources :queries
+  resources :queries do
+    resources :options do
+      member do
+        post :preferred
+        post :cancel_preference
+      end
+    end
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

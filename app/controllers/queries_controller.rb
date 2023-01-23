@@ -9,11 +9,14 @@ class QueriesController < ApplicationController
 
   # GET /queries/1 or /queries/1.json
   def show
+    @query = Query.find(params[:id])
+    @options = @query.options
   end
 
   # GET /queries/new
   def new
     @query = current_user.queries.build
+    @options = @query.options.build
   end
 
   # GET /queries/1/edit
@@ -66,6 +69,6 @@ class QueriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def query_params
-      params.require(:query).permit(:title)
+      params.require(:query).permit(:title, options_attributes: [:content, :preferred])
     end
 end

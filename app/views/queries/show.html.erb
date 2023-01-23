@@ -2,6 +2,24 @@
 
 <div>
   <%= link_to "Back to queries", queries_path %>
+
+  <%= form_with model: @query do |f| %>
+    <%= f.fields_for :options do |option_form| %>
+      <%= option_form.label :content %>
+      <%= option_form.text_field :content %>
+      <%= option_form.check_box :preferred %>
+      <%= option_form.submit "Add option" %>
+    <% end %>
+  <% end %>
+
+  <% @options.each do |option| %>
+    <%= option.content %>
+    <%= link_to "Edit", edit_option_path(option) %>
+    <%= link_to "Delete", option_path(option), method: :delete %>
+    <%= link_to "Mark as preferred", preferred_option_path(option), method: :post %>
+  <% end %>
+
+    
   <% if user_signed_in? %>
     <% if @query.user_id == current_user.id %>
     | <%= link_to "Edit this query", edit_query_path(@query) %>

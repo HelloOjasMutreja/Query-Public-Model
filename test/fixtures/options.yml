@@ -3,7 +3,9 @@
 one:
   content: MyString
   query: one
+  preferred: false
 
 two:
   content: MyString
   query: two
+  preferred: false
