@@ -1,23 +1,26 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <%= link_to "Query Model", root_path, class: "navbar-brand" %>
+    <%= link_to "Queries", root_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Log In", new_user_session_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "nav-link active") %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "New Query", new_query_path, class: "nav-link active" %>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "nav-link active") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "New Query", new_query_path, class: "nav-link active" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Log In", new_user_session_path, class: "nav-link active" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

@@ -1,32 +1,29 @@
 <%= render @query %>
 
 <div>
-  <%= link_to "Back to queries", queries_path %>
+  <%= form_with model: @query do |f| %>
+      <%= f.fields_for :query_option do |query_option_form| %>
+        <%# Allow creation of new options %>
+          <%= query_option_form.fields_for :option do |option_form| %>
+              <%= option_form.label :content %>:
+              <%= option_form.text_field :content %>
+              <%= option_form.check_box :preferred %>
+          <% end %>
+      <% end %>
+      <%= f.submit "Add Option" %>
+  <% end %>
+</div>
 
-
-<%= form_with model: @query do |f| %>
-123
-    <%= f.fields_for :query_option do |query_option_form| %>
-    test
-      <%# Allow creation of new options %>
-        <%= query_option_form.fields_for :option do |option_form| %>
-        case
-            <%= option_form.label :content %>
-            <%= option_form.text_field :content %>
-            <%= option_form.check_box :preferred %>
-        <% end %>
-    <% end %>
-    <%= f.submit "Update query" %>
-<% end %>
-
-
-
+<div>
   <% @query.options.each do |option| %>
       <%= option.content %>
-      <%= link_to "Edit", query_option_path(option) %>
       <%= button_to "Delete", query_option_path(@query, option), method: :delete %>
-      <%= link_to "Mark as preferred", preferred_query_option_path(option), method: :post %>
+      <%# link_to "Mark as preferred", preferred_query_option_path(option), method: :post %>
   <% end %>
+</div>
+
+<div>
+  <%= link_to "Back to queries", queries_path %>
     
   <% if user_signed_in? %>
     <% if @query.user_id == current_user.id %>

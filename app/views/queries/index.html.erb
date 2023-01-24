@@ -1,10 +1,7 @@
-<h1>Queries</h1>
-
 <div id="queries">
   <% @queries.each do |query| %>
-    <%= render query %>
-    <p>
-      <%= link_to "Show this query", query %>
-    </p>
+    <h1>
+      <%= link_to query.title ,query  %>
+    </h1>
   <% end %>
 </div>

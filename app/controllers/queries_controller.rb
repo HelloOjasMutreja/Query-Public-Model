@@ -21,7 +21,8 @@ class QueriesController < ApplicationController
   end
 
   # GET /queries/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /queries or /queries.json
   def create
@@ -51,7 +52,7 @@ class QueriesController < ApplicationController
         preferred: params[:query][:query_option][:option][:preferred] })
 
     if @query_option.save
-      redirect_to query_url(@query), notice: 'Query was successfully updated.'
+      redirect_to query_url(@query), notice: 'Option was successfully Added.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -72,7 +73,7 @@ class QueriesController < ApplicationController
     @query.destroy
 
     respond_to do |format|
-      format.html { redirect_to queries_url, notice: 'Query was successfully destroyed.' }
+      format.html { redirect_to queries_url, notice: "Query was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -97,7 +98,7 @@ class QueriesController < ApplicationController
   # <% end %>
 
   def query_params
-    params.require(:query).permit(:id, query_options_attribute:
+    params.require(:query).permit(:title, :id, query_options_attribute:
       [:id, { option_attributes: %i[id content preferred _destroy] }])
   end
 end
