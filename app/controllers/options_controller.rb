@@ -1,5 +1,5 @@
 class OptionsController < ApplicationController
-  before_action :find_option, only: [:edit, :update, :destroy, :preferred, :cancel_preference]
+  before_action :find_option, only: %i[edit update destroy preferred cancel_preference]
 
   def new
     @query = Query.find(params[:query_id])
@@ -16,8 +16,7 @@ class OptionsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @option.update(option_params)
@@ -28,8 +27,9 @@ class OptionsController < ApplicationController
   end
 
   def destroy
+    @query = params[:query_id]
     @option.destroy
-    redirect_to query_path(@option.query)
+    redirect_to query_path(@query)
   end
 
   def preferred
@@ -46,11 +46,12 @@ class OptionsController < ApplicationController
   end
 
   private
-    def find_option
-      @option = Option.find(params[:id])
-    end
 
-    def option_params
-      params.require(:option).permit(:content, :preferred)
-    end
+  def find_option
+    @option = Option.find(params[:id])
+  end
+
+  def option_params
+    params.require(:options).permit(:content, :preferred)
+  end
 end
