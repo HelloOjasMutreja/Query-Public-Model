@@ -98,7 +98,7 @@ class QueriesController < ApplicationController
   # <% end %>
 
   def query_params
-    params.require(:query).permit(:title, :id, query_options_attribute:
+    params.require(:query).permit(:title, :situation, :id, query_options_attribute:
       [:id, { option_attributes: %i[id content preferred _destroy] }])
   end
 end

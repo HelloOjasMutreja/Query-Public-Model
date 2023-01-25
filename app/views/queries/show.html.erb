@@ -1,4 +1,11 @@
-<%= render @query %>
+  <h1>
+    <%= @query.title %>
+  </h1>
+
+<% if @query.situation.present? %>
+  <h2>Situation:</h2>
+  <p><%= @query.situation %></p>
+<% end %>
 
 <div>
   <%= form_with model: @query do |f| %>
