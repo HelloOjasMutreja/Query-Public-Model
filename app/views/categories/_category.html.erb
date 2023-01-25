@@ -1,0 +1,12 @@
+<div id="<%= dom_id category %>">
+  <h2>
+    <strong><%= category.name %></strong>
+  </h2>
+
+  <% category.queries.each do |query| %>
+    <p>
+      <%= query.title %> | <%= link_to "View Query", query %>
+    </p>
+  <% end %>
+
+</div>

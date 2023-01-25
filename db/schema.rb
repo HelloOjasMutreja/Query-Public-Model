@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_112450) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_135202) do
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_queries", id: false, force: :cascade do |t|
+    t.integer "query_id", null: false
+    t.integer "category_id", null: false
+  end
+
   create_table "options", force: :cascade do |t|
     t.string "content"
     t.integer "query_id", null: false
@@ -31,6 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_112450) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.text "situation"
+    t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_queries_on_category_id"
   end
 
   create_table "query_options", force: :cascade do |t|
@@ -57,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_112450) do
   end
 
   add_foreign_key "options", "queries"
+  add_foreign_key "queries", "categories"
   add_foreign_key "query_options", "options"
   add_foreign_key "query_options", "queries"
 end

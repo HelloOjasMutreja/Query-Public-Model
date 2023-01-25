@@ -1,6 +1,7 @@
   <h1>
     <%= @query.title %>
   </h1>
+  <%= link_to @query.category.name, @query.category %>
 
 <% if @query.situation.present? %>
   <h2>Situation:</h2>

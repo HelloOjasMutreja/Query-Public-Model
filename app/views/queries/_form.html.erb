@@ -16,8 +16,14 @@
     <%= form.text_field :title %>
   </div>
 
+  <div>
     <%= form.label :situation %>
     <%= form.text_field :situation %>
+  </div>
+
+  <div>
+    <%= form.select :category_id, options_for_select(@categories.collect { |cat| [cat.name, cat.id]}) %>
+  </div>
 
   <div>
     <%= form.submit %>

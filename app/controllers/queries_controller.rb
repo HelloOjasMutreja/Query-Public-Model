@@ -1,6 +1,7 @@
 class QueriesController < ApplicationController
   before_action :set_query, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[new edit]
+  before_action :set_categories
 
   # GET /queries or /queries.json
   def index
@@ -42,6 +43,7 @@ class QueriesController < ApplicationController
   # PATCH/PUT /queries/1 or /queries/1.json
   def update
     @query = Query.find(params[:id])
+    @query.category_id = params[:category_id]
     # Create a new option for the query through the query_options association
     # Option.create(content: params[:query][:query_option][:option][:content],
     # preferred: params[:query][:query_option][:option][:preferred])
@@ -98,7 +100,11 @@ class QueriesController < ApplicationController
   # <% end %>
 
   def query_params
-    params.require(:query).permit(:title, :situation, :id, query_options_attribute:
+    params.require(:query).permit(:title, :situation, :category_id, :id, query_options_attribute:
       [:id, { option_attributes: %i[id content preferred _destroy] }])
+  end
+
+  def set_categories
+    @categories = Category.all.order(:name)      
   end
 end
