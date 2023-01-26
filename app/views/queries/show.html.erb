@@ -47,6 +47,10 @@
 </div>
 
 <div>
+  <%= link_to "Random Option", random_query_options_path(@query), class: "btn btn-primary" %>
+</div>
+
+<div>
   <%= link_to "Back to queries", queries_path %>
     
   <% if user_signed_in? %>

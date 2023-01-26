@@ -56,6 +56,11 @@ class OptionsController < ApplicationController
   #   end
   # end
 
+  def random
+    @query = Query.find(params[:query_id])
+    @option = @query.options.sample
+  end
+
   private
 
   def set_option

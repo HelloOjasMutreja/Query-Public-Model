@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :queries do
     resources :options do
+      get :random, on: :collection
       # member do
       #   post :mark_as_preferred
       #   post :cancel_preference
