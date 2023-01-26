@@ -11,10 +11,10 @@ Rails.application.routes.draw do
 
   resources :queries do
     resources :options do
-      member do
-        post :preferred
-        post :cancel_preference
-      end
+      # member do
+      #   post :mark_as_preferred
+      #   post :cancel_preference
+      # end
     end
   end
   
