@@ -10,9 +10,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      @user.create_daily_decision_list
+      # other existing code
+    else
+      render :new
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -59,4 +65,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+  private
+
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :daily_decision_list_id)
+    end
 end

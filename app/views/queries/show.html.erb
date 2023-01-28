@@ -51,6 +51,10 @@
 </div>
 
 <div>
+  <%= link_to "Add to Daily Decisions", daily_decision_create_path(current_user, query_id: @query.id), method: :post %>
+</div>
+
+<div>
   <%= link_to "Back to queries", queries_path %>
     
   <% if user_signed_in? %>

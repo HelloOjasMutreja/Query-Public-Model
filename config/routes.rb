@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'daily_decision/create'
+  get 'daily_decision/update'
+  get 'daily_decision/index'
+  get 'daily_decision/show'
   devise_scope :user do
     # Redirests signing out users back to sign-in
     get 'users', to: 'devise/sessions#new'
@@ -19,6 +23,8 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :daily_decision, only: [:create, :index, :show, :update, :destroy]
+
   resources :categories
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

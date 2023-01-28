@@ -12,6 +12,8 @@ class Query < ApplicationRecord
   validates :category_id, presence: true
   belongs_to :category
 
+  has_many :daily_decisions, through: :users
+
   private
   
   def destroy_options
