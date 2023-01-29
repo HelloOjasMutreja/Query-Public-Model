@@ -9,10 +9,20 @@ class Query < ApplicationRecord
   has_many :options, through: :query_options
   accepts_nested_attributes_for :query_options, allow_destroy: true
   
-  validates :category_id, presence: true
-  belongs_to :category
+  before_save :set_default_category
+  belongs_to :category, optional: true, default: -> { Category.find_by(name: 'uncategorized') }
 
-  has_many :daily_decisions, through: :users
+  belongs_to :daily_decision_list, optional: true
+  has_one :daily_decision
+  before_destroy :nullify_daily_decision_list_id
+
+  def set_default_category
+    self.category_id ||= Category.default.id
+  end
+
+  def nullify_daily_decision_list_id
+    DailyDecision.where(query_id: id).update_all(daily_decision_list_id: nil)
+  end
 
   private
   

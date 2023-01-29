@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_28_183751) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_29_212741) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_183751) do
     t.integer "query_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "daily_decision_list_id"
     t.index ["query_id"], name: "index_daily_decisions_on_query_id"
-    t.index ["user_id"], name: "index_daily_decisions_on_user_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_183751) do
     t.integer "user_id"
     t.text "situation"
     t.integer "category_id", null: false
+    t.integer "daily_decision_list_id"
     t.index ["category_id"], name: "index_queries_on_category_id"
   end
 
@@ -93,6 +94,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_183751) do
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "daily_decision_list_id", default: 1
+    t.index ["daily_decision_list_id"], name: "index_users_on_daily_decision_list_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -106,4 +109,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_183751) do
   add_foreign_key "query_options", "queries"
   add_foreign_key "selections", "options"
   add_foreign_key "selections", "users"
+  add_foreign_key "users", "daily_decision_lists"
 end

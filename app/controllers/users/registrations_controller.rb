@@ -10,15 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      @user.create_daily_decision_list
-      # other existing code
-    else
-      render :new
-    end
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit

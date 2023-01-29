@@ -50,8 +50,13 @@
   <%= link_to "Random Option", random_query_options_path(@query), class: "btn btn-primary" %>
 </div>
 
+<br />
+
 <div>
-  <%= link_to "Add to Daily Decisions", daily_decision_create_path(current_user, query_id: @query.id), method: :post %>
+  <%= form_tag daily_decisions_path, method: :post do %>
+    <%= hidden_field_tag :query_id, @query.id %>
+    <%= submit_tag "Add to Daily Decisions" %>
+  <% end %>
 </div>
 
 <div>

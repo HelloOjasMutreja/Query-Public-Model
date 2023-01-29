@@ -1,4 +1,4 @@
 class DailyDecisionList < ApplicationRecord
   belongs_to :user
-  has_many :daily_decisions
+  has_many :queries
 end

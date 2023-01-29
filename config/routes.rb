@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'daily_decision/create'
-  get 'daily_decision/update'
-  get 'daily_decision/index'
-  get 'daily_decision/show'
+
   devise_scope :user do
     # Redirests signing out users back to sign-in
     get 'users', to: 'devise/sessions#new'
@@ -14,6 +11,10 @@ Rails.application.routes.draw do
   }
 
   resources :queries do
+    member do
+      post 'add_to_daily_decision'
+      post 'remove_from_daily_decision'
+    end
     resources :options do
       get :random, on: :collection
       # member do
@@ -22,8 +23,9 @@ Rails.application.routes.draw do
       # end
     end
   end
-  
-  resources :daily_decision, only: [:create, :index, :show, :update, :destroy]
+
+  resources :daily_decisions, only: [:create]
+  resources :daily_decision_lists, only: [:index, :show]
 
   resources :categories
 

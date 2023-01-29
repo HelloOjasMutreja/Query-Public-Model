@@ -13,6 +13,7 @@ class QueriesController < ApplicationController
     @query = Query.find(params[:id])
     @query_option = @query.query_options.build
     @option = @query_option.build_option
+    @daily_decision = DailyDecision.new
   end
 
   # GET /queries/new
@@ -80,6 +81,28 @@ class QueriesController < ApplicationController
     end
   end
 
+  def add_to_daily_decision
+    @query = Query.find(params[:id])
+    @daily_decision_list = current_user.daily_decision_list
+    daily_decision = DailyDecision.new(query_id: @query.id, daily_decision_list_id: @daily_decision_list.id)
+    if daily_decision.save
+      redirect_to @query, notice: "Query added to daily decision list"
+    else
+      redirect_to @query, alert: "Failed to add query to daily decision list"
+    end
+  end
+
+  def remove_from_daily_decision
+    @query = Query.find(params[:id])
+    @daily_decision_list = current_user.daily_decision_list
+    daily_decision = DailyDecision.find_by(query_id: @query.id, daily_decision_list_id: @daily_decision_list.id)
+    if daily_decision.destroy
+      redirect_to @query, notice: "Query removed from daily decision list"
+    else
+      redirect_to @query, alert: "Failed to remove query from daily decision list"
+    end
+  end
+  
   private
 
   # Use callbacks to share common setup or constraints between actions.

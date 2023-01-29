@@ -1,0 +1,4 @@
+<% @queries_with_options.each do |q| %>
+  <%= q[:query].name %>
+  <%= q[:options].map(&:name).join(", ") %>
+<% end %>

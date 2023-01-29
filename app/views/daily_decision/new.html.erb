@@ -1,6 +1,0 @@
-<h1>Add Daily Decision</h1>
-<%= form_for @daily_decision do |f| %>
-  <%= f.label :query_id %>
-  <%= f.collection_select :query_id, Query.all, :id, :title %>
-  <%= f.submit %>
-<% end %>
