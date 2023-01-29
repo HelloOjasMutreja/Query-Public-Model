@@ -1,24 +1,15 @@
-# README
+1. The application has a **Query** model that allows users to create and upload a query with multiple options.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+2. The User and Category models are also present, a query belongs to a user and a category.
 
-Things you may want to cover:
+3. When a user views a query's show page, they have the option to add the query to their daily decision list.
 
-* Ruby version
+4. The application has a DailyDecision model that sets a query as a daily decision when a user clicks the "Add to Daily Decisions" button on the query's show page.
 
-* System dependencies
+5. The DailyDecisionList model is created for every user after they sign up, it has all the queries that are set as daily decisions by the user.
 
-* Configuration
+6. The daily decision list page, which is accessible via a link on the navigation bar, allows the user to view their daily decision list, edit which queries remain in the list, and add/remove queries.
 
-* Database creation
+7. The daily decisions added to daily decision list stay and the rest of them get destroyed after 7 days.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+8. The application uses a combination of Rails scaffolding and custom models and controllers to handle the functionality you described. When a user wants to add a query to their daily decision list, the application creates a new DailyDecision record with the user_id and query_id it also renders the daily decision list page where user can see the list and can update or delete the queries that he added.
